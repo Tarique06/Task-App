@@ -1,13 +1,16 @@
 const { Task, Sequelize } = require("../models");
 const { Op } = Sequelize;
+const getPagination = require('../lib/userFunction');
+const getPagingData = require('../lib/userFunction');
 
 //creating a new Tasks
 exports.create = async (req, res) => {
     try {
         const task = await Task.create({
             ...req.body,
-            user: req.user
+            userId: req.user.id
         })
+        console.log("#message:", req.user.id)
         res.status(201).send(task)
     } catch (e) {
         res.status(400).send({
@@ -21,8 +24,8 @@ exports.create = async (req, res) => {
 //Read all Tasks list
 exports.findAll = (req, res) => {
     const description = req.query.description;
-    var condition = description ? { description: { [Op.like]: `%${description}%` } } : null;
-
+    const uid = req.user.id
+    var condition = description ? { description: { [Op.like]: `%${description}%` }, userId: uid } : { userId: uid }
     Task.findAll({ where: condition })
         .then(data => {
             res.send(data);
@@ -103,3 +106,19 @@ exports.delete = (req, res) => {
         });
 };
 
+//Pagination 
+exports.findAllPublished = (req, res) => {
+    const { page, size } = req.query
+    //const { limit, offset } = getPagination(page, size)
+    const uid = req.user.id;
+    Task.findAll({ where: { completed: 1, userId: uid } })
+        .then(data => {
+            //const response = getPagingData(data, page, limit);
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Some error occurred while retrieving task"
+            })
+        })
+}

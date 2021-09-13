@@ -17,5 +17,7 @@ tasks.put("/:id", auth, controller.update);
 // Delete a Task with id
 tasks.delete("/:id", auth, controller.delete);
 
+// Retrieve all published Tasks
+tasks.get("/completed", auth, controller.findAllPublished);
 
 module.exports = tasks

@@ -11,11 +11,10 @@ var corsOptions = {
     origin: "http://localhost:8081"
 }
 
-//cors provides Express middleware for allowing CORS with different options
 app.use(cors(corsOptions))
 
 const db = require("./models/index")
-db.sequelize.sync()
+db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {

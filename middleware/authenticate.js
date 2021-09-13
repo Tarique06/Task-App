@@ -20,7 +20,7 @@ const auth = async (req, res, next) => {
 
         req.token = { jti, sub }
         req.user = user
-
+        console.log('#User', user)
         next()
     }
     catch (error) {
