@@ -29,6 +29,10 @@ app.use('/api/users', users)
 const tasks = require("./routes/task.routes")
 app.use('/api/tasks', tasks)
 
+global.__basedir = __dirname;
+const upload = require("./routes/images.routes")
+app.use('/api/upload', upload)
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080
 

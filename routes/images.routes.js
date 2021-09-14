@@ -1,15 +1,7 @@
-const express = require("express");
-const router = express.Router();
-const homeController = require("../controllers/home");
-const uploadController = require("../controllers/upload");
-const upload = require("../middleware/upload");
+const router = require('express').Router();
+const controller = require('../controllers/upload.controller');
+const upload = require('../middleware/upload')
 
-let routes = (app) => {
-    router.get("/", homeController.getHome);
+router.post('/api/uploadFiles', upload.single("uploadfile"), controller.upload);
 
-    router.post("/upload", upload.single("file"), uploadController.uploadFiles);
-
-    return app.use("/", router);
-};
-
-module.exports = routes;
+module.exports = router;
