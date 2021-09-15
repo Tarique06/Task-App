@@ -1,5 +1,6 @@
 const express = require("express")
 const cors = require("cors")
+const multer = require('multer');
 
 //Express builds REST APIs
 const app = express()

@@ -1,5 +1,6 @@
 const { Sequelize, Users } = require("../models");
 const { Op } = Sequelize;
+const { sendWelcomeEmail } = require('../emails/account')
 
 // Create and Save a new User
 exports.create = async (req, res) => {
@@ -28,6 +29,7 @@ exports.create = async (req, res) => {
         }
 
         await Users.create({ age, name, email, password })
+        sendWelcomeEmail(email, name)
         return res.status(200).json({
             message: 'Created Database with Hashed password'
         })

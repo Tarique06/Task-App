@@ -18,6 +18,7 @@
   "author": "Tarique",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.6",
     "argon2": "^0.28.2",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
