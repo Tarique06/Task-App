@@ -9,7 +9,6 @@ const auth = async (req, res, next) => {
 
         const token = authHeader.replace('Bearer ', '')
         const { jti, sub } = await jwt.verify(token)
-        console.log('auth-mw', { jti, sub })
 
         if (!await Token.findOne({ where: { jti } }))
             throw new Error('Token deleted')
@@ -20,7 +19,6 @@ const auth = async (req, res, next) => {
 
         req.token = { jti, sub }
         req.user = user
-        console.log('#User', user)
         next()
     }
     catch (error) {

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express")
 const cors = require("cors")
 const multer = require('multer');
@@ -17,6 +18,7 @@ app.use(cors(corsOptions))
 const db = require("./models/index")
 db.sequelize.sync();
 
+
 // simple route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to Task Application." })
@@ -35,7 +37,7 @@ const upload = require("./routes/images.routes")
 app.use('/api/upload', upload)
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`)
