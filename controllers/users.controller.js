@@ -36,7 +36,7 @@ exports.create = async (req, res) => {
     }
     catch (error) {
         console.warn(error)
-        res.status(500).send(process.env.NODE_ENV === 'development' ? error : 'something went wrong');
+        res.status(500).send(error);
     };
 }
 
