@@ -9,6 +9,7 @@ const Images = require("./images")(sequelize, Sequelize)
 module.exports = {
     sequelize,
     Sequelize,
+
     Images,
     Task,
     Token,

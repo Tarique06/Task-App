@@ -1,5 +1,9 @@
 const url = process.env.DATABASE_URL
 const options = {
+    ssl: {
+        rejectUnauthorized: false
+    },
+
     pool: {
         max: 5,
         min: 0,
